@@ -1,0 +1,91 @@
+SITE,SITE_NAME,TRANSECT,ID,REP,RELIEF
+1,Nav Fac,10R,1_10R,1,10.139
+1,Nav Fac,22R,1_22R,1,10.139
+1,Nav Fac,32L,1_32L,1,10.267
+1,Nav Fac,39R,1_39R,1,11.037
+1,Nav Fac,45R,1_45R,1,12.449
+2,West End Urchin,10L,2_10L,1,13.09
+2,West End Urchin,22L,2_22L,1,13.09
+2,West End Urchin,32R,2_32R,1,12.064
+2,West End Urchin,39L,2_39L,1,15.86
+2,West End Urchin,45L,2_45L,1,11.422
+3,West End Kelp,10R,3_10R,1,11.037
+3,West End Kelp,22R,3_22R,1,10.909
+3,West End Kelp,32L,3_32L,1,13.347
+3,West End Kelp,39R,3_39R,1,12.705
+3,West End Kelp,45L,3_45L,1,13.86
+4,West Dutch,10R,4_10R,1,16.94
+4,West Dutch,22L,4_22L,1,19.251
+4,West Dutch,32L,4_32L,1,24.641
+4,West Dutch,39L,4_39L,1,17.454
+4,West Dutch,45L,4_45L,1,15.4
+5,East Dutch,10R,5_10R,1,13.219
+5,East Dutch,22R,5_22R,1,17.325
+5,East Dutch,32L,5_32L,1,14.245
+5,East Dutch,39R,5_39R,1,14.63
+5,East Dutch,45R,5_45R,1,12.32
+6,Daytona,10R,6_10R,1,11.165
+6,Daytona,22L,6_22L,1,15.4
+6,Daytona,22R,6_22R,1,12.32
+6,Daytona,32L,6_32L,1,13.475
+6,Daytona,39L,6_39L,1,10.78
+1,Nav Fac,10R,1_10R,2,10.01
+1,Nav Fac,22R,1_22R,2,10.01
+1,Nav Fac,32L,1_32L,2,10.01
+1,Nav Fac,39R,1_39R,2,10.92
+1,Nav Fac,45R,1_45R,2,11.57
+2,West End Urchin,10L,2_10L,2,10.66
+2,West End Urchin,22L,2_22L,2,10.53
+2,West End Urchin,32R,2_32R,2,10.01
+2,West End Urchin,39L,2_39L,2,14.05
+2,West End Urchin,45L,2_45L,2,11.96
+3,West End Kelp,10R,3_10R,2,10.66
+3,West End Kelp,22R,3_22R,2,10.01
+3,West End Kelp,32L,3_32L,2,10.66
+3,West End Kelp,39R,3_39R,2,10.01
+3,West End Kelp,45L,3_45L,2,11.7
+4,West Dutch,10R,4_10R,2,15.86
+4,West Dutch,22L,4_22L,2,15.86
+4,West Dutch,32L,4_32L,2,23.79
+4,West Dutch,39L,4_39L,2,13.39
+4,West Dutch,45L,4_45L,2,15.47
+5,East Dutch,10R,5_10R,2,12.61
+5,East Dutch,22R,5_22R,2,16.9
+5,East Dutch,32L,5_32L,2,13
+5,East Dutch,39R,5_39R,2,16.9
+5,East Dutch,45R,5_45R,2,10.01
+6,Daytona,10R,6_10R,2,10.4
+6,Daytona,22L,6_22L,2,12.35
+6,Daytona,22R,6_22R,2,10.01
+6,Daytona,32L,6_32L,2,13
+6,Daytona,39L,6_39L,2,10.01
+1,Nav Fac,10R,1_10R,3,10.14
+1,Nav Fac,22R,1_22R,3,10.01
+1,Nav Fac,32L,1_32L,3,10.14
+1,Nav Fac,39R,1_39R,3,11.7
+1,Nav Fac,45R,1_45R,3,11.7
+2,West End Urchin,10L,2_10L,3,12.35
+2,West End Urchin,22L,2_22L,3,10.01
+2,West End Urchin,32R,2_32R,3,12.61
+2,West End Urchin,39L,2_39L,3,13.39
+2,West End Urchin,45L,2_45L,3,10.27
+3,West End Kelp,10R,3_10R,3,12.35
+3,West End Kelp,22R,3_22R,3,10.14
+3,West End Kelp,32L,3_32L,3,10.4
+3,West End Kelp,39R,3_39R,3,11.7
+3,West End Kelp,45L,3_45L,3,11.83
+4,West Dutch,10R,4_10R,3,18.46
+4,West Dutch,22L,4_22L,3,17.68
+4,West Dutch,32L,4_32L,3,20.15
+4,West Dutch,39L,4_39L,3,15.08
+4,West Dutch,45L,4_45L,3,12.48
+5,East Dutch,10R,5_10R,3,12.74
+5,East Dutch,22R,5_22R,3,16.38
+5,East Dutch,32L,5_32L,3,14.3
+5,East Dutch,39R,5_39R,3,19.76
+5,East Dutch,45R,5_45R,3,10.14
+6,Daytona,10R,6_10R,3,10.27
+6,Daytona,22L,6_22L,3,12.74
+6,Daytona,22R,6_22R,3,10.14
+6,Daytona,32L,6_32L,3,10.27
+6,Daytona,39L,6_39L,3,10.01
