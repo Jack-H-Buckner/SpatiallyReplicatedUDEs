@@ -31,6 +31,20 @@ data <- dat_long %>% ungroup()%>%
 
 write.csv(data,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/processed_time_series.csv")
 
+
+species <- c("MacPyr","MacJuv")
+data <- dat_long %>% ungroup()%>%
+  filter(variable %in% species) %>% 
+  select(PERIOD,SITE,variable,value)%>%
+  group_by(variable)%>%
+  mutate(value = value/mean(value))%>%
+  dcast(PERIOD+SITE~variable)
+
+
+write.csv(data,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/processed_time_series_no_log.csv")
+
+
+
 species <- c("MesFra","StrPur","PycHel")
 dat_covars <- dat_long %>% ungroup()%>%
   filter(variable %in% species) %>% 
