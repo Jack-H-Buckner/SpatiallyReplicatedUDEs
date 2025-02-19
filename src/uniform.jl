@@ -15,7 +15,7 @@ Vars = CSV.read("data/kelp_obs_errors.csv", DataFrame)[:,2:end]
 
 
 # build neural network with 9 inputs and 2 outputs 
-NN, NNparameters = SimpleNeuralNetwork(2+1,2,hidden = 10)
+NN, NNparameters = SimpleNeuralNetwork(2+1,2,hidden = 5)
 
 # define derivatives (nerual network only)
 function derivs!(du,u,i,X,p,t)
@@ -33,15 +33,16 @@ model = MultiCustomDerivatives(dat,X,derivs!,init_parameters;
 
 function training!(model)
     # train using conditional likelihood
-    train!(model,loss_function = "conditional likelihood", optim_options = (maxiter = 100,step_size=0.05))
+    train!(model,loss_function = "conditional likelihood", optim_options = (maxiter = 100,step_size=0.05),verbose = false)
     # finish with a smaller step size 
-    train!(model,loss_function = "conditional likelihood", optim_options = (maxiter = 250,step_size=0.01))
+    train!(model,loss_function = "conditional likelihood", optim_options = (maxiter = 250,step_size=0.01),verbose = false)
 end
 
 k = 20
 training_data, testing_data, forecasts = leave_future_out(model, training!, k)
 
 for i in 1:k 
+    print(k," ")
     path = "/Users/johnbuckner/github/UDEsWithSpatialReplicates/results/uniform"
     file = string("/training_data_",i,".csv")
     CSV.write(string(path,file),training_data[i])

@@ -15,7 +15,7 @@ Vars = CSV.read("data/kelp_obs_errors.csv", DataFrame)[:,2:end]
 
 
 # build neural network with 9 inputs and 2 outputs 
-NN, NNparameters = SimpleNeuralNetwork(2+7,2,hidden = 10)
+NN, NNparameters = SimpleNeuralNetwork(2+7,2,hidden = 5)
 
 # define derivatives (nerual network only)
 function derivs!(du,u,i,X,p,t)

@@ -16,12 +16,12 @@ Vars = CSV.read("data/kelp_obs_errors.csv", DataFrame)[:,2:end]
 
 
 # build neural network with 9 inputs and 2 outputs 
-NN, NNparameters_1 = SimpleNeuralNetwork(2+1,2,hidden = 10)
-NN, NNparameters_2 = SimpleNeuralNetwork(2+1,2,hidden = 10)
-NN, NNparameters_3 = SimpleNeuralNetwork(2+1,2,hidden = 10)
-NN, NNparameters_4 = SimpleNeuralNetwork(2+1,2,hidden = 10)
-NN, NNparameters_5 = SimpleNeuralNetwork(2+1,2,hidden = 10)
-NN, NNparameters_6 = SimpleNeuralNetwork(2+1,2,hidden = 10)
+NN, NNparameters_1 = SimpleNeuralNetwork(2+1,2,hidden = 5)
+NN, NNparameters_2 = SimpleNeuralNetwork(2+1,2,hidden = 5)
+NN, NNparameters_3 = SimpleNeuralNetwork(2+1,2,hidden = 5)
+NN, NNparameters_4 = SimpleNeuralNetwork(2+1,2,hidden = 5)
+NN, NNparameters_5 = SimpleNeuralNetwork(2+1,2,hidden = 5)
+NN, NNparameters_6 = SimpleNeuralNetwork(2+1,2,hidden = 5)
 
 init_parameters = (NN1 = NNparameters_1, NN2 = NNparameters_2,
                     NN3 = NNparameters_3, NN4 = NNparameters_4,
