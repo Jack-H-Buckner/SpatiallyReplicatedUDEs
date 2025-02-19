@@ -38,16 +38,7 @@ function training!(model)
     train!(model,loss_function = "conditional likelihood", optim_options = (maxiter = 250,step_size=0.01),verbose = false)
 end
 
-k = 20
-training_data, testing_data, forecasts = leave_future_out(model, training!, k)
+k = 15
+path = "/Users/johnbuckner/github/UDEsWithSpatialReplicates/results/uniform"
+leave_future_out(model, training!, k, path)
 
-for i in 1:k 
-    print(k," ")
-    path = "/Users/johnbuckner/github/UDEsWithSpatialReplicates/results/uniform"
-    file = string("/training_data_",i,".csv")
-    CSV.write(string(path,file),training_data[i])
-    file = string("/testing_data_",i,".csv")
-    CSV.write(string(path,file),testing_data[i])
-    file = string("/forecasts_",i,".csv")
-    CSV.write(string(path,file),forecasts[i])
-end 

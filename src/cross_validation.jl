@@ -30,15 +30,25 @@ function forecast_data(UDE, test_data)
 
 end
 
-function leave_future_out(model, training!, k)
-
+function leave_future_out(model, training!, k, path)
 
     training_data = []
     testing_data = []
     data = model.data_frame
+    series = unique(data.series)
     for i in 1:k
-        push!(training_data,data[1:(end-i),:])
-        push!(testing_data,data[(end-i+1):(end),:])
+        data_series = data[data.series .== series[1],:]
+        train = data_series[1:(end-i),:]
+        test = data_series[(end-i+1):(end),:]
+        for s in 2:length(series)
+            data_series = data[data.series .== series[s],:]
+            train_i = data_series[1:(end-i),:]
+            test_i = data_series[(end-i+1):(end),:]
+            train = vcat(train,train_i)
+            test = vcat(test,test_i)
+        end
+        push!(training_data,train)
+        push!(testing_data,test)
     end
 
     forecasts = Array{Any}(nothing, k)
@@ -51,7 +61,14 @@ function leave_future_out(model, training!, k)
         model_i = model.constructor(training_i,model.X)
         training!(model_i)
         
-        forecasts[i] = forecast_data(model_i, testing_i)
+        forecasts_i = forecast_data(model_i, testing_i)
+
+        file = string("/training_data_",i,".csv")
+        CSV.write(string(path,file),training_i)
+        file = string("/testing_data_",i,".csv")
+        CSV.write(string(path,file),testing_i)
+        file = string("/forecasts_",i,".csv")
+        CSV.write(string(path,file),forecasts_i)
 
     end
     
