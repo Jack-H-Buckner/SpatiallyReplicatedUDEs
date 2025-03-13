@@ -1,0 +1,52 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+df_cov <- read.csv("~/github/UDEsWithSpatialReplicates/results/covariates/all.csv")
+df_ind <- read.csv("~/github/UDEsWithSpatialReplicates/results/indicator/all.csv")
+df_unif <- read.csv("~/github/UDEsWithSpatialReplicates/results/uniform/all.csv")
+df_uniq <- read.csv("~/github/UDEsWithSpatialReplicates/results/unique/all.csv")
+
+df_cov$model <- "covariates"
+df_ind$model <- "indicator"
+df_unif$model <- "uniform"
+df_uniq$model <- "unique"
+
+dat <- rbind(df_cov,df_ind) %>% rbind(df_unif) %>% rbind(df_uniq) %>%
+  mutate(sq_error = ((juv_f-juv)^2+(adult_f-adult)^2))
+
+head(dat)
+```
+```{r}
+ggplot(dat %>% filter(time < 11, sim < 14),
+       aes(x = time, y = sqrt(sq_error), color = model))+
+  geom_line()+
+  theme_bw() + facet_grid(sim~series)
+
+ggsave("results/figures/lfo_each.png")
+```
+
+```{r}
+ggplot(dat %>% filter(time < 10, sim < 14),
+       aes(x = time, y = sqrt(sq_error), color = model))+
+  stat_summary(fun.data = "mean_cl_boot", geom = "pointrange",size = 0.5,
+               position = position_dodge(width = 0.5))+
+  theme_bw() + facet_wrap(~series)
+
+  ggsave("results/figures/lfo_series.png")
+```
+
+
+```{r}
+ggplot(dat %>% filter(time > 0, time < 10, sim < 13),
+       aes(x = time, y = sqrt(sq_error), color = model))+
+  stat_summary(fun.data = "mean_cl_boot", geom = "pointrange",size = 0.5,
+               position = position_dodge(width = 0.5))+
+  theme_bw() 
+ggsave("results/figures/lfo.png")
+```

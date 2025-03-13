@@ -32,6 +32,32 @@ data <- dat_long %>% ungroup()%>%
 write.csv(data,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/processed_time_series.csv")
 
 
+
+
+species <- c("MacPyr","MacJuv")
+data <- dat_long %>% ungroup()%>%
+  filter(variable %in% species) %>% 
+  mutate(value = log(value + 2))%>%
+  select(PERIOD,SITE,variable,value)%>%
+  group_by(variable)%>%
+  mutate(value = scale(value))%>%
+  dcast(PERIOD~SITE+variable)
+
+inds = c()
+for(i in 1:nrow(data)){
+  if(!(any(is.na(data[i,])))){
+    inds <- append(inds,i)
+  }
+}
+
+
+data <- data[inds,]
+
+
+write.csv(data,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/processed_time_series_wide.csv")
+
+
+
 species <- c("MacPyr","MacJuv")
 data <- dat_long %>% ungroup()%>%
   filter(variable %in% species) %>% 
@@ -64,5 +90,28 @@ rugosity_dat <- dat_r %>% group_by(SITE)%>%
 
 dat_covars <- merge(dat_covars,rugosity_dat, by = "SITE")
   
+write.csv(dat_covars,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/processed_rugosity.csv")
+
+
+
+species <- c("StrPur")
+dat_covars <- dat_long %>% ungroup()%>%
+  filter(variable %in% species) %>% 
+  mutate(value = log(value + 2))%>%
+  select(PERIOD,SITE,variable,value)%>%
+  group_by(variable)%>%
+  mutate(value = scale(value))%>%ungroup()%>%
+  filter(!is.na(value))%>%
+  dcast(PERIOD~SITE+variable)
+
+dat_covars[is.na(dat_covars)] <- 0
+write.csv(dat_covars,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/covars_wide.csv")
+
+rugosity_dat <- dat_r %>% group_by(SITE)%>%
+  summarize(RELIEF = mean(RELIEF))%>%ungroup()%>%
+  mutate(RELIEF = (RELIEF - mean(RELIEF))/sd(RELIEF))
+
+dat_covars <- merge(dat_covars,rugosity_dat, by = "SITE")
+
 write.csv(dat_covars,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/processed_rugosity.csv")
 
