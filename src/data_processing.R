@@ -51,99 +51,18 @@ data <- dat_long %>% ungroup()%>%
   filter(Species %in% species ) %>% 
   mutate(value = log(value))%>%
   select(PERIOD,SITE,Species,value)%>%
-  group_by(Species)%>%
+  group_by(Species,SITE)%>%
   mutate(value = scale(value))%>%
   dcast(PERIOD+SITE~Species)
 
+
+ggplot(data %>% 
+         melt(id.var = c("PERIOD","SITE"), variable.name = "Species") %>%
+         filter(Species %in% species ),
+       aes(x = PERIOD, y = value, color = as.factor(SITE)))+
+  geom_line(linewidth = 1)+theme_classic()+facet_wrap(~Species)+
+  scale_color_manual(values = palette_6)
 
 write.csv(data,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/processed_time_series.csv")
 
-
-
-
-
-
-
-
-
-species <- c("MacPyr","MacJuv")
-data <- dat_long %>% ungroup()%>%
-  filter(Species %in% species) %>% 
-  mutate(value = log(value + 2))%>%
-  select(PERIOD,SITE,Species,value)%>%
-  group_by(Species)%>%
-  mutate(value = scale(value))%>%
-  dcast(PERIOD~SITE+Species)
-
-inds = c()
-for(i in 1:nrow(data)){
-  if(!(any(is.na(data[i,])))){
-    inds <- append(inds,i)
-  }
-}
-
-
-data <- data[inds,]
-
-
-write.csv(data,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/processed_time_series_wide.csv")
-
-
-
-species <- c("MacPyr","MacJuv")
-data <- dat_long %>% ungroup()%>%
-  filter(Species %in% species) %>% 
-  select(PERIOD,SITE,Species,value)%>%
-  group_by(Species)%>%
-  mutate(value = value/mean(value))%>%
-  dcast(PERIOD+SITE~Species)
-
-
-write.csv(data,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/processed_time_series_no_log.csv")
-
-
-
-species <- c("MesFra","StrPur","PycHel")
-dat_covars <- dat_long %>% ungroup()%>%
-  filter(Species %in% species) %>% 
-  mutate(value = log(value + 2))%>%
-  select(PERIOD,SITE,Species,value)%>%
-  group_by(Species)%>%
-  mutate(value = scale(value))%>%
-  dcast(PERIOD+SITE~Species)
-
-
-
-dat_r <- read.csv("/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/SubstrateRugosity_r.csv")
-
-rugosity_dat <- dat_r %>% group_by(SITE)%>%
-  summarize(RELIEF = mean(RELIEF))%>%ungroup()%>%
-  mutate(RELIEF = (RELIEF - mean(RELIEF))/sd(RELIEF))
-
-dat_covars <- merge(dat_covars,rugosity_dat, by = "SITE")
-  
-write.csv(dat_covars,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/processed_rugosity.csv")
-
-
-
-species <- c("StrPur")
-dat_covars <- dat_long %>% ungroup()%>%
-  filter(Species %in% species) %>% 
-  mutate(value = log(value + 2))%>%
-  select(PERIOD,SITE,Species,value)%>%
-  group_by(Species)%>%
-  mutate(value = scale(value))%>%ungroup()%>%
-  filter(!is.na(value))%>%
-  dcast(PERIOD~SITE+Species)
-
-dat_covars[is.na(dat_covars)] <- 0
-write.csv(dat_covars,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/covars_wide.csv")
-
-rugosity_dat <- dat_r %>% group_by(SITE)%>%
-  summarize(RELIEF = mean(RELIEF))%>%ungroup()%>%
-  mutate(RELIEF = (RELIEF - mean(RELIEF))/sd(RELIEF))
-
-dat_covars <- merge(dat_covars,rugosity_dat, by = "SITE")
-
-write.csv(dat_covars,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/processed_rugosity.csv")
 
