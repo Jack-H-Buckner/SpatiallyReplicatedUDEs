@@ -23,7 +23,7 @@ using Base.Threads
 include("/Users/johnbuckner/.julia/dev/UniversalDiffEq.jl/src/UniversalDiffEq.jl")
 include("model_comparison_fn.jl")
 
-
+init = (training,X,covars, tau_, regularization_weight,site) -> init(training,X,covars, tau_, regularization_weight)
 comparison = (training,path_to_results) -> compare_models(training, X,init,covars_sets,tau_grid,
                                                         regularzation_grid, n_per_fold_inner, k_folds_inner;
                                                         save_results = true,path_to_results = path_to_results)

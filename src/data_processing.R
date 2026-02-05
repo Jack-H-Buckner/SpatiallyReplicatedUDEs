@@ -66,3 +66,13 @@ ggplot(data %>%
 write.csv(data,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/processed_time_series.csv")
 
 
+
+scaling_factors <- dat_long %>% ungroup()%>%
+  filter(Species %in% species ) %>% 
+  mutate(value = log(value))%>%
+  select(PERIOD,SITE,Species,value)%>%
+  group_by(Species,SITE)%>%
+  summarize(mean = mean(value),
+            sd = sd(value))
+
+  write.csv(scaling_factors,"/Users/johnbuckner/github/UDEsWithSpatialReplicates/data/scaling_factors.csv")
