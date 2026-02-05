@@ -25,8 +25,6 @@ function compare_models(training, X,init,covars_sets,tau_grid,
         model,training! = init(training,X,covars, tau_, regularization)
         summary_df,raw_df=UniversalDiffEq.leave_future_out_predict(model, training!, n_per_fold , k_folds)
         summary_df.covars .= repeat([string(covar_names[covars])],size(summary_df)[1])
-        print(ia," ")
-        println(repeat([ia],size(summary_df)[1]))
         summary_df.covars_ind .= repeat([ia],size(summary_df)[1])
         summary_df.tau_ .= repeat([tau_],size(summary_df)[1])
         summary_df.tau_ind .= repeat([ib],size(summary_df)[1])
@@ -113,7 +111,7 @@ function nested_cv(data,X,comparison, n_per_fold::Int, k_folds::Int,path_to_resu
         training_i = training_data[i]
         testing_i = testing_data[i]
         
-        model_i,model_juv_i,model_adults_i = comparison(training_i, "$path_to_results/fold_$i")
+        model_i,model_juv_i,model_adults_i = comparison(training_i, "$path_to_results/fold_$(i)_$(file_tag)")
         inits,obs_i,preds_i = UniversalDiffEq.predictions(model_i, testing_i)
         inits,obs_i,preds_juv_i = UniversalDiffEq.predictions(model_juv_i, testing_i)
         inits,obs_i,preds_adults_i = UniversalDiffEq.predictions(model_adults_i, testing_i)

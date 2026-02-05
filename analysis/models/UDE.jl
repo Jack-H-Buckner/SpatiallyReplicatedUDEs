@@ -26,7 +26,7 @@ function init(training,X,covars, tau_, regularization_weight)
                                                 init_parameters;time_column_name = "PERIOD")
 
     function training!(model)
-        UniversalDiffEq.train!(model, 
+        UniversalDiffEq.train!(model, verbose = false,
                 loss_function = "spline gradient matching", 
                 regularization_weight = regularization_weight, 
                 optim_options = (maxiter = 500, step_size = 0.025), 

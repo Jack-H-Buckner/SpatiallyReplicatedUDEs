@@ -1,0 +1,2 @@
+variable,MSE,MSE_SE,MAE,MAE_SE,correlation,count,covars_ind,covars,tau_,tau_ind,regularization,regularization_ind
+MacJuv,0.5922454097966158,0.19336293069401478,0.6144828330481861,0.10359928997963519,0.8118080728384452,21,2,"[""StrPur""]",0.2,3,500.0,4
