@@ -1,5 +1,5 @@
 function soft_plus(x)
-    log(exp(x)+1)
+    log(exp(10*x)+1)/10
 end 
 
 function get_scaling_factors(site)
@@ -8,6 +8,7 @@ function get_scaling_factors(site)
     Xinds = [4,6]
     mean = scaling_factors.mean[Xinds]
     scale = scaling_factors.sd[Xinds]
+    print(scale)
     return scale, mean
 end
 
@@ -25,19 +26,21 @@ function init(training,X,covars, tau_, regularization_weight, site)
         inputs_ma = u[2:2]
 
         fmo_A, fmo_J = NN_mo(inputs_mo, p.NN_mo)
-        fma = NN_ma(inputs_ma, p.NN_ma)[1]
+        fma = NN_ma(inputs_ma, p.NN_ma)
 
         J = exp(scale[1]*x_J+mean[1])
         A = exp(scale[2]*x_A+mean[2])
 
-        dJ = exp(p.r)*A/J - soft_plus.(fma) - soft_plus.(fmo_J)
-        dA = soft_plus.(fma)*J/A - soft_plus.(fmo_A)
+
+        dJ = (soft_plus.(fma[1])*A./(J) -  soft_plus.(fma[2]) - soft_plus.(fmo_J))./scale[1]
+        dA = (soft_plus.(fma[2])*J./(A) - soft_plus.(fmo_A))./scale[2]
+
         du = [dJ,dA]
 
         return du
     end
     
-    init_parameters = (NN_ma = NNparameters_ma,  NN_mo = NNparameters_mo, r = 0.5)
+    init_parameters = (NN_ma = NNparameters_ma,  NN_mo = NNparameters_mo)
 
     model = UniversalDiffEq.CustomDerivatives(training,X,(u,X,p,t) -> dudt(u,X,p,t,covars,scale, mean),
                                                 init_parameters;time_column_name = "PERIOD")

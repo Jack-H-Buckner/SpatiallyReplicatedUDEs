@@ -1,0 +1,2 @@
+variable,MSE,MSE_SE,MAE,MAE_SE,correlation,count,covars,covars_ind,tau_,tau_ind,regularization,regularization_ind
+MacPyr,1.4573544470403585,0.3885313340950124,0.9865675909583302,0.15556973283885187,NaN,21,String[],1,0.05,1,10.0,1

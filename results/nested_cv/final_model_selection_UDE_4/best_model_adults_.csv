@@ -1,0 +1,2 @@
+variable,MSE,MSE_SE,MAE,MAE_SE,correlation,count,covars,covars_ind,tau_,tau_ind,regularization,regularization_ind
+MacPyr,1.0801384949963186,0.30746218701820216,0.7923553846655541,0.15038474646516187,0.6449065380754158,21,"[""PycHel""]",3,0.5,4,50.0,1

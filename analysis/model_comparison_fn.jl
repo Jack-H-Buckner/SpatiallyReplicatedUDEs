@@ -27,6 +27,7 @@ function compare_models(training, X,init,covars_sets,tau_grid,
         summary_df.covars .= repeat([string(covar_names[covars])],size(summary_df)[1])
         summary_df.covars_ind .= repeat([ia],size(summary_df)[1])
         summary_df.tau_ .= repeat([tau_],size(summary_df)[1])
+        print(repeat([ib],size(summary_df)[1]))
         summary_df.tau_ind .= repeat([ib],size(summary_df)[1])
         summary_df.regularization .= repeat([regularization],size(summary_df)[1])
         summary_df.regularization_ind .= repeat([ic],size(summary_df)[1])
@@ -130,7 +131,7 @@ function nested_cv(data,X,comparison, n_per_fold::Int, k_folds::Int,path_to_resu
 
     end
 
-    model,model_juv,model_adults = comparison(data,"$path_to_results/final_model_selection")
+    model,model_juv,model_adults = comparison(data,"$path_to_results/final_model_selection_$file_tag")
 
     summary_df,df = UniversalDiffEq.summarize_cv_results(model,preds,obs,times) 
     summary_df_juv,df_juv = UniversalDiffEq.summarize_cv_results(model_juv,preds_juv,obs,times) 

@@ -8,3 +8,9 @@ covars_sets = [[],[1],[2],[1,2]]
 tau_grid = [0.05,0.1,0.2,0.5]
 regularzation_grid = [10.0,50.0,100.0,500]
 
+
+regularzation_grid_UDE = [50.0,100.0,500,1000]
+
+covars_sets_null = [[]]
+tau_grid_null = [0.05]
+regularzation_grid_null = [10.0]

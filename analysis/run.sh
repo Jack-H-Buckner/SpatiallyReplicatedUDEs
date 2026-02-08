@@ -1,4 +1,6 @@
 alias julia="/Applications/Julia-1.10.app/Contents/Resources/julia/bin/julia"
 #julia -t 8 analysis/model_selection_tests.jl NODE 4
 #julia -t 8 analysis/model_selection.jl NODE 4
-julia -t 8 analysis/model_selection_UDE.jl UDE 4
+#julia -t 8 analysis/model_selection_UDE.jl UDE 4
+#julia -t 8 analysis/model_selection.jl NODE 1
+julia -t 8 analysis/model_selection_NULL.jl NULL 4
